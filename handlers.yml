@@ -1,0 +1,16 @@
+---
+##################################################### Début doc in code #################################################################################
+#  _    ___
+# | |  / __|  handlers/main pour tous les rôles
+# | |__\__ \
+# |____|___/  Gardez en Ordralphabétix svp!
+#
+###################################################### Fin doc in code ##################################################################################
+- name: "Magnifique_nom_de_service restart"
+  become: true
+  ansible.builtin.systemd:
+    name: 'magnifique_nom_de_service'
+    state: 'restarted'
+    enabled: true
+    daemon_reload: true
+###################################################### Fin doc in code ##################################################################################

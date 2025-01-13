@@ -1,0 +1,23 @@
+---
+##################################################### Début doc in code #################################################################################
+#  _    ___
+# | |  / __|    tasks/main pour le rôle ABCDEF
+# | |__\__ \
+# |____|___/    Indiquez vos commentaires intéressants ici svp
+#
+###################################################### Fin doc in code ##################################################################################
+- name: "Inclure les tâches à tout le monde"
+  ansible.builtin.include_tasks:
+    file: 'all.yml'
+
+- name: "Déterminer si on a un task file pour cette distro et ce major version"
+  delegate_to: 'localhost'
+  ansible.builtin.stat:
+    path: '{{ role_path }}/tasks/{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml'
+  register: __distro_existe
+
+- name: "Inclure le bon fichier de variables"
+  ansible.builtin.include_tasks:
+    file: '{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml'
+  when:
+    - __distro_existe.stat.exists

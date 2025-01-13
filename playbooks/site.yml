@@ -1,0 +1,6 @@
+---
+- name: "Conformité"
+  hosts: 'all'
+  gather_facts: true
+  roles:
+    - 'ci'
